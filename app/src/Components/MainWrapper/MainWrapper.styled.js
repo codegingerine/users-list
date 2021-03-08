@@ -9,6 +9,7 @@ export const MainStyled = styled.main`
   width: 100%;
   overflow: hidden;
   transition: all 0.2s ease;
+  background: #efefef;
 `;
 
 export const MainContentStyled = styled.div`
