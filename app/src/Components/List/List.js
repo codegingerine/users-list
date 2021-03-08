@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ListItem from "Components/ListItem";
 import { ListStyled } from "./List.styled";
 
-const List = ({ mappedList }) => {
+const List = ({ mappedList, isSelected, onCheckboxChange }) => {
   return (
     <ListStyled>
       {mappedList.map(({ id, first_name, last_name, avatar }) => (
@@ -13,6 +13,8 @@ const List = ({ mappedList }) => {
           lastName={last_name}
           imgSrc={avatar}
           imgAlt={last_name}
+          isSelected={isSelected}
+          onCheckboxChange={onCheckboxChange}
         />
       ))}
     </ListStyled>

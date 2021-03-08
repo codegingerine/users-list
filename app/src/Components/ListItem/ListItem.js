@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ImageBox from "Components/ImageBox";
+import Checkbox from "Components/Checkbox";
 
 import {
   ListItemStyled,
@@ -9,12 +10,16 @@ import {
 } from "./ListItem.styled";
 
 const ListItem = (
-  { firstName, lastName, imgSrc, imgAlt, initials },
+  { firstName, lastName, imgSrc, imgAlt, isSelected, onCheckboxChange },
   ...rest
 ) => {
   return (
     <ListItemStyled {...rest}>
-      <ImageBox imgSrc={imgSrc} imgAlt={imgAlt} initials={`${firstName.charAt(0)}${lastName.charAt(0)}`} />
+      <ImageBox
+        imgSrc={imgSrc}
+        imgAlt={imgAlt}
+        initials={`${firstName.charAt(0)}${lastName.charAt(0)}`}
+      />
       <ItemContentStyled>
         <ItemTextStyled>
           {firstName}
@@ -22,6 +27,7 @@ const ListItem = (
         </ItemTextStyled>
         <ItemTextStyled>{lastName}</ItemTextStyled>
       </ItemContentStyled>
+      <Checkbox isSelected={isSelected} onCheckboxChange={onCheckboxChange} />
     </ListItemStyled>
   );
 };
