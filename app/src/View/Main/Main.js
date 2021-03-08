@@ -3,13 +3,20 @@ import { BASE_URL } from "Utils/api";
 import { getSortedData } from "Utils/helpers";
 import MainWrapper from "Components/MainWrapper";
 import List from "Components/List";
+import SearchBar from "Components/SearchBar";
 
 const Main = () => {
   const [initialUsers, setinItialUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    initialUsers && setUsers(initialUsers);
+  }, [initialUsers]);
 
   const fetchUsers = () => {
     fetch(`${BASE_URL}`)
@@ -21,9 +28,43 @@ const Main = () => {
       });
   };
 
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleInputClear = () => {
+    setQuery("");
+    setUsers(initialUsers);
+  };
+
+  const handleSearch = () => {
+    const searchList = initialUsers.filter(({ first_name, last_name }) => {
+      const searchByTerms = [first_name, last_name].map((item) =>
+        item.toLowerCase()
+      );
+      const queryTerm = query.toLowerCase().split(/[\s,]+/);
+      return queryTerm.reduce((acc, val) => {
+        return acc || searchByTerms.includes(val);
+      }, false);
+    });
+    return setUsers(searchList);
+  };
+
+  const submitQuery = (e) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
   return (
     <MainWrapper>
-      <List mappedList={initialUsers} />
+      <SearchBar
+        onSubmit={submitQuery}
+        placeholder="Enter user name"
+        value={query}
+        onChange={handleInputChange}
+        onClose={handleInputClear}
+      />
+      <List mappedList={users} />
     </MainWrapper>
   );
 };
