@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL } from "Utils/api";
+import { getSortedData } from "Utils/helpers";
 import MainWrapper from "Components/MainWrapper";
 import List from "Components/List";
 
@@ -15,7 +16,7 @@ const Main = () => {
       .then((res) => res.json())
       .then((data) => {
         const partialData = data.filter((_, id) => id < 100);
-        setinItialUsers(partialData);
+        setinItialUsers(getSortedData(partialData, "last_name", true));
         console.log(partialData);
       });
   };
