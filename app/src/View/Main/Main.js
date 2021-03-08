@@ -4,12 +4,14 @@ import { getSortedData } from "Utils/helpers";
 import MainWrapper from "Components/MainWrapper";
 import List from "Components/List";
 import SearchBar from "Components/SearchBar";
+import Loader from "Components/Loader";
 import { TitleStyled } from "./Main.styled";
 
 const Main = () => {
   const [initialUsers, setinItialUsers] = useState([]);
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -20,11 +22,13 @@ const Main = () => {
   }, [initialUsers]);
 
   const fetchUsers = () => {
+    setIsLoading(true);
     fetch(`${BASE_URL}`)
       .then((res) => res.json())
       .then((data) => {
         const partialData = data.filter((_, id) => id < 100);
         setinItialUsers(getSortedData(partialData, "last_name", true));
+        setIsLoading(false);
         console.log(partialData);
       });
   };
@@ -66,7 +70,11 @@ const Main = () => {
         onChange={handleInputChange}
         onClose={handleInputClear}
       />
-      <List mappedList={users} />
+      {isLoading ? (
+        <Loader loaderMsg="Contacts loading..." />
+      ) : (
+        <List mappedList={users} />
+      )}
     </MainWrapper>
   );
 };
