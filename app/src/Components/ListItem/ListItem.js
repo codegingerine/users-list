@@ -8,10 +8,13 @@ import {
   ItemTextStyled,
 } from "./ListItem.styled";
 
-const ListItem = ({ firstName, lastName, imgSrc, imgAlt }, ...rest) => {
+const ListItem = (
+  { firstName, lastName, imgSrc, imgAlt, initials },
+  ...rest
+) => {
   return (
     <ListItemStyled {...rest}>
-      <ImageBox imgSrc={imgSrc} imgAlt={imgAlt} />
+      <ImageBox imgSrc={imgSrc} imgAlt={imgAlt} initials={`${firstName.charAt(0)}${lastName.charAt(0)}`} />
       <ItemContentStyled>
         <ItemTextStyled>
           {firstName}

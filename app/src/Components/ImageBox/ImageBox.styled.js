@@ -17,3 +17,8 @@ export const ImageStyled = styled.img`
   width: 100%;
   border-radius: 50%;
 `;
+
+export const UserInitialsStyled = styled.p`
+  font-size: 10px;
+  color: #d8d8d8;
+`;
