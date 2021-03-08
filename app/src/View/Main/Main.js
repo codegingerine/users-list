@@ -4,6 +4,7 @@ import { getSortedData } from "Utils/helpers";
 import MainWrapper from "Components/MainWrapper";
 import List from "Components/List";
 import SearchBar from "Components/SearchBar";
+import { TitleStyled } from "./Main.styled";
 
 const Main = () => {
   const [initialUsers, setinItialUsers] = useState([]);
@@ -57,6 +58,7 @@ const Main = () => {
 
   return (
     <MainWrapper>
+      <TitleStyled>Contacts</TitleStyled>
       <SearchBar
         onSubmit={submitQuery}
         placeholder="Enter user name"
