@@ -6,8 +6,14 @@ import { ListStyled } from "./List.styled";
 const List = ({ mappedList }) => {
   return (
     <ListStyled>
-      {mappedList.map(({ id, first_name, last_name }) => (
-        <ListItem key={id} firstName={first_name} lastName={last_name} />
+      {mappedList.map(({ id, first_name, last_name, avatar }) => (
+        <ListItem
+          key={id}
+          firstName={first_name}
+          lastName={last_name}
+          imgSrc={avatar}
+          imgAlt={last_name}
+        />
       ))}
     </ListStyled>
   );

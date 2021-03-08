@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ImageBox from "Components/ImageBox";
 
 import {
   ListItemStyled,
@@ -7,11 +8,15 @@ import {
   ItemTextStyled,
 } from "./ListItem.styled";
 
-const ListItem = ({ firstName, lastName }) => {
+const ListItem = ({ firstName, lastName, imgSrc, imgAlt }, ...rest) => {
   return (
-    <ListItemStyled>
+    <ListItemStyled {...rest}>
+      <ImageBox imgSrc={imgSrc} imgAlt={imgAlt} />
       <ItemContentStyled>
-        <ItemTextStyled>{firstName}{"\u00a0"}</ItemTextStyled>
+        <ItemTextStyled>
+          {firstName}
+          {"\u00a0"}
+        </ItemTextStyled>
         <ItemTextStyled>{lastName}</ItemTextStyled>
       </ItemContentStyled>
     </ListItemStyled>
